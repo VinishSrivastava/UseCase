@@ -6,7 +6,7 @@ from ..models.claim_recommendation import ClaimRecommendation
 def recommend_claim_type(incident_text: str, clauses: list) -> ClaimRecommendation:
     """Simple heuristic recommender: looks for keywords."""
     text = incident_text.lower()
-    if "burglary" in text or "theft" in text:
+    if any(k in text for k in ("burglary", "theft", "rob", "robbed", "stolen", "steal")):
         claim_type = "Burglary/Theft"
         required = ["police_report", "item_list", "proof_of_ownership"]
     elif "water" in text or "flood" in text:
